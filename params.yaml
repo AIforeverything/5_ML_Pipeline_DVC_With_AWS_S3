@@ -6,4 +6,4 @@ feature_engineering:
 
 model_building:
   n_estimatore: 22
-  random_state: 42  
+  random_state: 42 

@@ -73,6 +73,12 @@ def preprocess_data(df: pd.DataFrame) -> pd.DataFrame:
     try:
         df.drop(columns = ['Unnamed: 2', 'Unnamed: 3', 'Unnamed: 4'], inplace = True)
         df.rename(columns = {'v1': 'target', 'v2': 'text'}, inplace = True)
+        
+        logger.debug("Duplicates dropped: %s",df.duplicated().sum())
+        df.drop_duplicates(inplace=True)
+        logger.debug("dropped null values: %s",df.isnull().sum().sum())
+        df.dropna(inplace=True)
+        
         logger.debug('Data preprocessing completed')
         return df
     except KeyError as e:
@@ -88,7 +94,7 @@ def save_data(train_data:pd.DataFrame,test_data:pd.DataFrame,data_path:str)->Non
     try:
         # making datapath/raw directory
         raw_data_path= os.path.join(data_path,'raw')
-        os.makedirs(raw_data_path)
+        os.makedirs(raw_data_path,exist_ok=True)
         # saving the train_data, test_data into 'raw' folder.
         train_data.to_csv(os.path.join(raw_data_path,"train.csv"),index=False)
         test_data.to_csv(os.path.join(raw_data_path,"test.csv"),index=False)
