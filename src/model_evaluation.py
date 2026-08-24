@@ -136,6 +136,8 @@ def main():
 
         metrics= evaluate_model(clf,X_test,y_test)
 
+
+
         save_metrics(metrics,'reports/metrics.json') 
 
     except Exception as e:
