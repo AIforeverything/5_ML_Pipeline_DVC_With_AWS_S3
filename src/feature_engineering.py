@@ -65,36 +65,7 @@ def load_data(file_path:str)->pd.DataFrame:
         raise
     except Exception as e:
         logger.error("Unexpected error has occurred: %s",e)   
-        raise
-
-# def apply_tfidf(train_df:pd.DataFrame,test_df:pd.DataFrame,features:int):
-#     """ This function is used to apply tfidf vectorizer to given dataframes."""   
-#     try:
-#         vectorizer = TfidfVectorizer(max_features=features)
-
-#         # converting the dataframe to single array to apply tfidf
-#         X_train= train_df["text"].values
-#         y_train= train_df["target"].values
-#         X_test= train_df["text"].values
-#         y_test= test_df["target"].values
-
-#         # apply tfidf
-#         X_train_tfidf= vectorizer.fit_transform(X_train)
-#         X_test_tfidf= vectorizer.transform(X_test)        
-
-#         # making the dataframe from above after conversion
-#         train_df= pd.DataFrame(X_train_tfidf.toarray())
-#         train_df['label']= y_train
-
-#         test_df= pd.DataFrame(X_test_tfidf.toarray())
-#         test_df["label"]= y_test
-
-#         logger.debug("TFIDF is applied and data is transformed.")
-
-#         return train_df,test_df
-
-#     except Exception as e:
-#         logger.error('Error occurred during tfidf transformation: %s',e)    
+        raise 
 
 def apply_tfidf(train_data: pd.DataFrame, test_data: pd.DataFrame, max_features: int) -> tuple:
     """Apply TfIdf to the data."""
